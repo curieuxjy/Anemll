@@ -61,6 +61,10 @@ let package = Package(
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Transformers", package: "swift-transformers")
             ]
+        ),
+        .testTarget(
+            name: "AnemllCoreTests",
+            dependencies: ["AnemllCore"]
         )
     ]
-) 
+)
