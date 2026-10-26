@@ -198,12 +198,12 @@ fi
 
 # Install CoreML Tools (must be after PyTorch)
 echo "🧠 Installing CoreML Tools..."
-$PIP_CMD install coremltools>=9.0
+$PIP_CMD install "coremltools>=9.0"
 
 # Install core ANEMLL dependencies
 echo "📚 Installing core dependencies..."
-$PIP_CMD install transformers>=4.36.0
-$PIP_CMD install numpy>=1.24.0
+$PIP_CMD install "transformers>=4.36.0"
+$PIP_CMD install "numpy>=1.24.0"
 $PIP_CMD install "scikit-learn<=1.5.1"
 $PIP_CMD install datasets
 $PIP_CMD install accelerate

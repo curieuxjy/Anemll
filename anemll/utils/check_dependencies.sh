@@ -125,8 +125,8 @@ if [ "$SKIP_CHECK" = false ]; then
 
     if [ -z "$coremltools_version" ]; then
         echo "coremltools is required but not installed. Aborting. (Issue #3)"
-        echo "If using uv: uv pip install coremltools>=9.0"
-        echo "If using pip: pip install coremltools>=9.0"
+        echo "If using uv: uv pip install 'coremltools>=9.0'"
+        echo "If using pip: pip install 'coremltools>=9.0'"
         echo "Please refer to the troubleshooting guide in docs/troubleshooting.md for more information."
         exit 1
     fi
