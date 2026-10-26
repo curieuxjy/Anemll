@@ -41,6 +41,9 @@ This directory contains development, testing, and debugging files organized to s
 - `test_single_token_generation.py` - Single token generation
 - `test_coreml_sequential.py` - CoreML sequential testing
 
+### LM Head Argmax Testing
+- `test_argmax_fp16_index.py` - `--argmax` LM head indices on CPU_ONLY vs CPU_AND_NE, with the ANE compute plan (issue #60: int32 indices rounded to fp16 on ANE)
+
 ## Development Guidelines
 
 ### Adding New Architecture Support

@@ -485,12 +485,14 @@ class QwenConverter(BaseConverter):
                     all_idx = []
                     all_val = []
                     for logits in logits_list:
+                        # [1, 1, chunk] -> [chunk]: squeeze fp16 logits, not int32 indices (ANE runs them as fp16, #60)
+                        logits = logits.squeeze(0).squeeze(0)
                         chunk_argmax = torch.argmax(logits, dim=-1, keepdim=True)
                         chunk_max_val = torch.gather(logits, -1, chunk_argmax)
                         all_idx.append(chunk_argmax.to(torch.int32))
                         all_val.append(chunk_max_val)
-                    argmax_idx = torch.cat(all_idx, dim=-1).squeeze(0).squeeze(0)
-                    argmax_val = torch.cat(all_val, dim=-1).squeeze(0).squeeze(0)
+                    argmax_idx = torch.cat(all_idx, dim=-1)
+                    argmax_val = torch.cat(all_val, dim=-1)
                     return (argmax_idx, argmax_val)
 
                 if self.mode == "16":
@@ -1066,12 +1068,14 @@ class QwenConverter(BaseConverter):
                     all_idx = []
                     all_val = []
                     for logits in logits_list:
+                        # [1, 1, chunk] -> [chunk]: squeeze fp16 logits, not int32 indices (ANE runs them as fp16, #60)
+                        logits = logits.squeeze(0).squeeze(0)
                         chunk_argmax = torch.argmax(logits, dim=-1, keepdim=True)
                         chunk_max_val = torch.gather(logits, -1, chunk_argmax)
                         all_idx.append(chunk_argmax.to(torch.int32))
                         all_val.append(chunk_max_val)
-                    argmax_idx = torch.cat(all_idx, dim=-1).squeeze(0).squeeze(0)
-                    argmax_val = torch.cat(all_val, dim=-1).squeeze(0).squeeze(0)
+                    argmax_idx = torch.cat(all_idx, dim=-1)
+                    argmax_val = torch.cat(all_val, dim=-1)
                     return (argmax_idx, argmax_val)
 
                 return tuple(logits_list)
