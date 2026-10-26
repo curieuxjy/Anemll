@@ -89,14 +89,15 @@ print_usage() {
     echo "                  Use 'bits,0' or 'bits,tensor' for per-tensor quantization"
     echo "                  Default per_channel is 8 if not specified"
     echo "  --lut3          LUT bits for LM head (default: 6)"
-    echo "  --dynamic-prefill-slice  Use dynamic slicing for prefill KV writes (default ON)"
-    echo "  --static-prefill-slice   Disable dynamic slicing for prefill KV writes"
-    echo "  --single-cache           Use unified KV cache (Gemma3 only; disables rotate)"
-    echo "  --chunk-no      Convert only this chunk number (1-based) for chunked parts"
     echo "                  Format: 'bits' or 'bits,per_channel' (e.g., '6' or '6,4')"
     echo "                  Use 'bits,0' or 'bits,tensor' for per-tensor quantization"
     echo "                  Default per_channel is 8 if not specified"
     echo "  --no-lut        Disable all LUT quantization (FP16 only)"
+    echo "                  A later --lut1/--lut2/--lut3 still sets that part"
+    echo "  --dynamic-prefill-slice  Use dynamic slicing for prefill KV writes (default ON)"
+    echo "  --static-prefill-slice   Disable dynamic slicing for prefill KV writes"
+    echo "  --single-cache           Use unified KV cache (Gemma3 only; disables rotate)"
+    echo "  --chunk-no      Convert only this chunk number (1-based) for chunked parts"
     echo "  --restart       Restart from specific step (1-8, default: 1)"
     echo "  --only          Run only specified step and exit (1-8)"
     echo "  --prefix        Prefix for model names (default: llama)"
@@ -159,6 +160,12 @@ while [[ $# -gt 0 ]]; do
         --lut3)
             LUT_PART3="$2"
             shift 2
+            ;;
+        --no-lut)
+            LUT_PART1=""
+            LUT_PART2=""
+            LUT_PART3=""
+            shift
             ;;
         --restart)
             RESTART_STEP="$2"

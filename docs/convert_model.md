@@ -36,6 +36,7 @@ This catches FP16 overflow risks early and saves a JSON report under `tests/dev/
 | `--lut1` | LUT bits for embeddings (see LUT Format below) | none |
 | `--lut2` | LUT bits for FFN/prefill (see LUT Format below) | 4 |
 | `--lut3` | LUT bits for LM head (see LUT Format below) | 6 |
+| `--no-lut` | Disable LUT quantization for all parts (FP16 only). A later `--lut1`/`--lut2`/`--lut3` still sets that part | off |
 | `--restart` | Restart from specific step | 1 |
 | `--only` | Run only specified step and exit | none |
 | `--chunk` | Number of chunks or `auto` (see below) | 2 |
